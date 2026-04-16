@@ -1987,7 +1987,7 @@ img {
 
 <!-- 파일명 입력 모달 -->
 <div id="filenameModal" onclick="if(event.target===this)filenameCancel()"
-  style="position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:9800;opacity:0;pointer-events:none;transition:opacity .2s;">
+  style="position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:flex-start;padding-top:12vh;justify-content:center;z-index:9800;opacity:0;pointer-events:none;transition:opacity .2s;">
   <div style="background:var(--panel);border:1px solid var(--b2);border-radius:8px;padding:20px 22px;width:min(320px,90vw);display:flex;flex-direction:column;gap:14px;" onclick="event.stopPropagation()">
     <div style="font-size:13px;font-weight:700;color:var(--t1);letter-spacing:.08em;">파일명 입력</div>
     <div style="display:flex;align-items:center;gap:6px;">
@@ -6429,7 +6429,7 @@ function showNameInput(defaultName, ext, onConfirm){
 
   const dlg = document.createElement('div');
   dlg.id = '_nameInputDlg';
-  dlg.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:9950;';
+  dlg.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:flex-start;padding-top:12vh;justify-content:center;z-index:9950;';
   dlg.innerHTML = `
     <div style="background:var(--panel);border:1px solid var(--b2);border-radius:6px;padding:20px 22px;min-width:280px;max-width:90vw;display:flex;flex-direction:column;gap:14px;">
       <div style="font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--t2);">파일명 입력</div>
@@ -6445,8 +6445,7 @@ function showNameInput(defaultName, ext, onConfirm){
   document.body.appendChild(dlg);
 
   const inp = dlg.querySelector('#_nameInputField');
-  inp.focus();
-  inp.select();
+  if(!isMobile()){ inp.focus(); inp.select(); }
 
   const close = ()=>dlg.remove();
   dlg.querySelector('#_nameInputCancel').addEventListener('click', close);
@@ -9834,7 +9833,7 @@ function promptFilename(defaultName, cb){
   if(!modal || !inp) return;
   inp.value = defaultName;
   modal.classList.add('open');
-  setTimeout(()=>{ inp.focus(); inp.select(); }, 120);
+  if(!isMobile()) setTimeout(()=>{ inp.focus(); inp.select(); }, 120);
   modal._cb = cb;
 }
 function filenameConfirm(){
