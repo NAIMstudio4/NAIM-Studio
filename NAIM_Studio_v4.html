@@ -2516,6 +2516,8 @@ img {
           <button class="btn btn-red" onclick="dmDeleteSelected()" style="flex:1;font-size:12px;">🗑 삭제</button>
         </div>
         <button class="btn btn-ghost" onclick="closeDataManage();openSessionModal('export');" style="width:100%;font-size:12px;">📦 히스토리 내보내기</button>
+        <input type="file" id="sesImportInput" accept=".zip" style="display:none" onchange="sesImportFile(this)">
+        <button class="btn btn-ghost" onclick="sesImportInput.click()" style="width:100%;font-size:12px;">📥 히스토리 가져오기</button>
         <div style="height:1px;background:var(--b2);margin:4px 0;"></div>
         <button class="btn btn-red" onclick="dmDeleteAll()" style="width:100%;font-size:12px;font-weight:700;">🗑 전체 삭제</button>
       </div>
@@ -9101,6 +9103,88 @@ async function deleteSession(id){
       if(!list.children.length) list.innerHTML='<div style="font-size:11px;color:var(--t3);text-align:center;padding:20px;">저장된 히스토리 없음</div>';
     }catch(e){ toast('세션 삭제 실패: '+e.message,'err'); }
   });
+}
+
+async function importSessions(file){
+  if(!GDB.db) await GDB.init();
+  let zip;
+  try{
+    zip = await new JSZip().loadAsync(file);
+  }catch(e){ toast('ZIP 파일 읽기 실패','err'); return; }
+
+  const metaFile = zip.file('sessions.json');
+  if(!metaFile){ toast('올바른 히스토리 백업 파일이 아닙니다','err'); return; }
+  let meta;
+  try{ meta = JSON.parse(await metaFile.async('string')); }
+  catch(e){ toast('메타 파일 파싱 실패','err'); return; }
+
+  toast(`${meta.length}개 히스토리 복원 중…`);
+  let imported = 0;
+
+  for(const ses of meta){
+    // 새 세션 생성 (원본 label·ts 보존)
+    const newSesId = await new Promise((res,rej)=>{
+      const tx = GDB.db.transaction(GDB.SES_STORE,'readwrite');
+      const req = tx.objectStore(GDB.SES_STORE).add({
+        ts: ses.ts||Date.now(),
+        label: ses.label||'가져온 히스토리',
+        count: 0,
+        thumb: null
+      });
+      req.onsuccess = ()=>res(req.result);
+      req.onerror = rej;
+    });
+
+    // 이 세션 이미지 목록: img/{sesId}__{imgId}__{fname}
+    const imgPaths = Object.keys(zip.files).filter(f=>
+      f.startsWith(`img/${ses.id}__`) && !zip.files[f].dir
+    );
+
+    let firstBlob = null, count = 0;
+    for(const imgPath of imgPaths){
+      const namePart = imgPath.slice(imgPath.indexOf('/')+1); // {sesId}__{imgId}__{fname}
+      const fname = namePart.split('__').slice(2).join('__') || 'image.png';
+      const blob = await zip.files[imgPath].async('blob');
+      if(!firstBlob) firstBlob = blob;
+      await new Promise((res,rej)=>{
+        const tx = GDB.db.transaction(GDB.IMG_STORE,'readwrite');
+        tx.objectStore(GDB.IMG_STORE).add({
+          sessionId: newSesId,
+          blob, fname,
+          label: ses.label||'',
+          prompt: '',
+          ts: ses.ts||Date.now()
+        });
+        tx.oncomplete = res;
+        tx.onerror = rej;
+      });
+      count++;
+    }
+
+    // 세션 count·thumb 업데이트
+    if(count > 0){
+      await new Promise((res,rej)=>{
+        const tx = GDB.db.transaction(GDB.SES_STORE,'readwrite');
+        const store = tx.objectStore(GDB.SES_STORE);
+        const req = store.get(newSesId);
+        req.onsuccess = ()=>{
+          const s = req.result;
+          if(s){ s.count=count; s.thumb=firstBlob; store.put(s); }
+        };
+        tx.oncomplete = res; tx.onerror = rej;
+      });
+    }
+    imported++;
+  }
+
+  toast(`${imported}개 히스토리 가져오기 완료`,'ok');
+  updateStorageInfo();
+}
+
+function sesImportFile(inp){
+  if(!inp.files[0]) return;
+  importSessions(inp.files[0]).catch(e=>toast('가져오기 실패: '+e.message,'err'));
+  inp.value='';
 }
 
 async function gdbRestoreGallery(){
