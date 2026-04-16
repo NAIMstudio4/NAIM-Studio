@@ -537,7 +537,7 @@ input[type=checkbox]{accent-color:var(--acc);width:14px;height:14px;cursor:point
 .ses-btns{display:flex;flex-direction:column;gap:4px;flex-shrink:0;}
 
 /* 히스토리 내보내기 선택 모달 */
-#sesExportModal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:9350;opacity:0;pointer-events:none;transition:opacity .2s;}
+#sesExportModal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:9750;opacity:0;pointer-events:none;transition:opacity .2s;}
 #sesExportModal.open{opacity:1;pointer-events:all;}
 #sesExportModalBox{background:var(--panel);border:1px solid var(--b2);border-radius:6px;width:min(560px,94vw);max-height:85vh;display:flex;flex-direction:column;overflow:hidden;}
 #sesExportHdr{padding:10px 16px;background:var(--card2);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
@@ -4672,7 +4672,7 @@ document.addEventListener('keydown',e=>{
     if(document.getElementById('presetModal')?.classList.contains('open')){
       closePresetModal(); return;
     }
-    // 세션 내보내기 모달 (9350)
+    // 세션 내보내기 모달 (9750)
     if(document.getElementById('sesExportModal')?.classList.contains('open')){
       closeSesExportModal(); return;
     }
@@ -10207,7 +10207,11 @@ function setTheme(name){
   setTheme(t);
 })();
 
+function isPWA(){
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
 function setFullscreen(on){
+  if(isPWA()) return; // PWA는 이미 전체화면 — 변경 불가
   if(on){
     const req = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
     if(req) req.call(document.documentElement).catch(()=>{
@@ -10219,15 +10223,17 @@ function setFullscreen(on){
     if(exit && (document.fullscreenElement || document.webkitFullscreenElement)) exit.call(document);
   }
 }
-// 실제 전체화면 상태 변경 시 토글 동기화
+// 실제 전체화면 상태 변경 시 토글 동기화 (PWA standalone 포함)
 function _syncFullscreenToggle(){
-  const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+  const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement) || isPWA();
   document.body.classList.toggle('is-fullscreen', isFs);
   const t = document.getElementById('fullscreenToggle');
   if(t) t.checked = isFs;
 }
 document.addEventListener('fullscreenchange',       _syncFullscreenToggle);
 document.addEventListener('webkitfullscreenchange', _syncFullscreenToggle);
+// 초기 로드 시 PWA 상태 즉시 반영
+document.addEventListener('DOMContentLoaded', _syncFullscreenToggle, {once:true});
 window.addEventListener("orientationchange", ()=>setTimeout(()=>{
   // 방향 전환 시 configPanel 열려있으면 위치 재계산
   const panel = document.getElementById('configPanel');
