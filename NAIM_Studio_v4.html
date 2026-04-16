@@ -1320,12 +1320,23 @@ img {
   <!-- 전체화면 + 설정 -->
   <div id="topbar-right" style="display:flex;align-items:center;gap:6px;padding:0 10px;flex-shrink:0;">
     <div class="mob-only" style="display:flex;align-items:center;gap:5px;flex-shrink:0;">
-      <span style="font-size:9px;letter-spacing:.08em;color:var(--t3);white-space:nowrap;">FULL</span>
-      <label class="toggle-switch" title="전체화면" style="flex-shrink:0;">
-        <input type="checkbox" id="fullscreenToggle" onchange="setFullscreen(this.checked)">
-        <span class="toggle-slider"></span>
-      </label>
+      <div id="pwaCloseBtn" style="display:none;">
+        <button class="btn btn-ghost btn-sm" onclick="window.close()" title="종료" style="font-size:16px;padding:4px 8px;flex-shrink:0;line-height:1;display:inline-flex;align-items:center;justify-content:center;color:var(--red);">✕</button>
+      </div>
+      <div id="fullscreenToggleWrap">
+        <span style="font-size:9px;letter-spacing:.08em;color:var(--t3);white-space:nowrap;">FULL</span>
+        <label class="toggle-switch" title="전체화면" style="flex-shrink:0;">
+          <input type="checkbox" id="fullscreenToggle" onchange="setFullscreen(this.checked)">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
     </div>
+    <script>
+    if(window.matchMedia('(display-mode: fullscreen)').matches || window.matchMedia('(display-mode: standalone)').matches){
+      document.getElementById('pwaCloseBtn').style.display='flex';
+      document.getElementById('fullscreenToggleWrap').style.display='none';
+    }
+    </script>
     <button class="btn btn-ghost btn-sm" onclick="toggleConfigPanel()" id="configBtn" style="font-size:16px;padding:4px 8px;flex-shrink:0;line-height:1;display:inline-flex;align-items:center;justify-content:center;"><span style="position:relative;top:2px;">⚙</span></button>
   </div>
 </div>
