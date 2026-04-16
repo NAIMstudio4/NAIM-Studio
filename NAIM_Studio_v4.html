@@ -1286,6 +1286,11 @@ img {
 
   #lb-prev-zone, #lb-next-zone { width: 135px; }
 }
+
+@media (display-mode: fullscreen), (display-mode: standalone) {
+  #fullscreenToggleWrap { display: none !important; }
+  #pwaPowerWrap { display: flex !important; }
+}
 </style>
 <body>
 <div id="app-root">
@@ -1335,12 +1340,8 @@ img {
     (function(){
       var isPWA = window.matchMedia('(display-mode: fullscreen)').matches || window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
       if(isPWA){
-        var wrap = document.getElementById('fullscreenToggleWrap');
-        if(wrap) wrap.style.display='none';
         var t = document.getElementById('fullscreenToggle');
         if(t && !t.checked){ t.checked=true; setFullscreen(true); }
-        var pw = document.getElementById('pwaPowerWrap');
-        if(pw) pw.style.display='flex';
       }
     })();
     </script>
