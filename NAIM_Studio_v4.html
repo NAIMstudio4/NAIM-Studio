@@ -2,9 +2,6 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <!-- Android 브라우저 UI 숨김 -->
@@ -1290,11 +1287,6 @@ img {
 
   #lb-prev-zone, #lb-next-zone { width: 135px; }
 }
-
-@media (display-mode: fullscreen), (display-mode: standalone) {
-  #fullscreenToggleWrap { display: none !important; }
-  #pwaPowerWrap { display: flex !important; }
-}
 </style>
 <body>
 <div id="app-root">
@@ -1329,28 +1321,12 @@ img {
   <!-- 전체화면 + 설정 -->
   <div id="topbar-right" style="display:flex;align-items:center;gap:6px;padding:0 10px;flex-shrink:0;">
     <div class="mob-only" style="display:flex;align-items:center;gap:5px;flex-shrink:0;">
-      <div id="fullscreenToggleWrap" style="display:flex;align-items:center;gap:5px;">
-        <span style="font-size:9px;letter-spacing:.08em;color:var(--t3);white-space:nowrap;">FULL</span>
-        <label class="toggle-switch" title="전체화면" style="flex-shrink:0;">
-          <input type="checkbox" id="fullscreenToggle" onchange="setFullscreen(this.checked)">
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
-      <div id="pwaPowerWrap" style="display:none;align-items:center;">
-        <button style="font-size:11px;padding:4px 6px;flex-shrink:0;line-height:1;display:inline-flex;align-items:center;justify-content:center;color:var(--t2);background:#3e3e70;border:none;border-radius:4px;cursor:pointer;" onclick="toast('①close 시도');window.close()">①close</button>
-        <button style="font-size:11px;padding:4px 6px;flex-shrink:0;line-height:1;display:inline-flex;align-items:center;justify-content:center;color:var(--t2);background:#3e3e70;border:none;border-radius:4px;cursor:pointer;" onclick="toast('②back 시도');history.back()">②back</button>
-        <button style="font-size:11px;padding:4px 6px;flex-shrink:0;line-height:1;display:inline-flex;align-items:center;justify-content:center;color:var(--t2);background:#3e3e70;border:none;border-radius:4px;cursor:pointer;" onclick="toast('③go 시도');history.go(-history.length)">③go</button>
-      </div>
+      <span style="font-size:9px;letter-spacing:.08em;color:var(--t3);white-space:nowrap;">FULL</span>
+      <label class="toggle-switch" title="전체화면" style="flex-shrink:0;">
+        <input type="checkbox" id="fullscreenToggle" onchange="setFullscreen(this.checked)">
+        <span class="toggle-slider"></span>
+      </label>
     </div>
-    <script>
-    (function(){
-      var isPWA = window.matchMedia('(display-mode: fullscreen)').matches || window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-      if(isPWA){
-        var t = document.getElementById('fullscreenToggle');
-        if(t && !t.checked){ t.checked=true; setFullscreen(true); }
-      }
-    })();
-    </script>
     <button class="btn btn-ghost btn-sm" onclick="toggleConfigPanel()" id="configBtn" style="font-size:16px;padding:4px 8px;flex-shrink:0;line-height:1;display:inline-flex;align-items:center;justify-content:center;"><span style="position:relative;top:2px;">⚙</span></button>
   </div>
 </div>
@@ -3378,11 +3354,14 @@ function onApiKeyChange(){
   // 모바일 입력창도 동기화
   const mob=document.getElementById('apiKeyMob');
   if(mob && mob!==document.activeElement) mob.value=document.getElementById('apiKey').value;
+  const prevOn = (p.className.includes('pill-on'));
   if(on){
     document.getElementById('anlasBox').style.display='';
     fetchAnlas();
+    if(!prevOn) toast('API 키 입력됨', 'ok');
   } else {
     document.getElementById('anlasBox').style.display='none';
+    if(prevOn) toast('API 키 제거됨', 'err');
   }
 }
 
