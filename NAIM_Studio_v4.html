@@ -5632,13 +5632,6 @@ function loadSettings(){
     saveSettings._loading = false;
     // 복원 완료 후 최종 상태 저장 (타이밍 문제 방지)
     setTimeout(()=>saveSettings(), 0);
-    // PWA면 토글 자동 클릭 — 사용자가 직접 누른 것과 동일한 동작
-    if(isPWA()){
-      setTimeout(()=>{
-        const t = document.getElementById('fullscreenToggle');
-        if(t && !t.checked) t.click();
-      }, 100);
-    }
   }
 }
 function _loadSettingsInner(){
@@ -7880,13 +7873,14 @@ function _attachHdrSwipeClose(hdrId, boxId, closeFn){
       box.style.transform = _baseTransform ? `${_baseTransform} translateY(120%)` : 'translateY(120%)';
       box.style.opacity = '0';
       setTimeout(()=>{
-        box.style.transition = 'none';
         closeFn();
-        requestAnimationFrame(()=>{
+        // modal fade-out transition(.2s) 완료 후 box 스타일 리셋 — 잔상 방지
+        setTimeout(()=>{
+          box.style.transition = 'none';
           box.style.transform = _baseTransform;
           box.style.opacity = '';
-          box.style.transition = '';
-        });
+          requestAnimationFrame(()=>{ box.style.transition = ''; });
+        }, 220);
       }, 200);
     } else {
       box.style.transition = 'transform .15s ease, opacity .15s';
@@ -7913,6 +7907,8 @@ _attachHdrSwipeClose('charSlotPickerHdr', 'charSlotPickerBox',    closeQCharsSlo
 _attachHdrSwipeClose('outfitSlotPickerHdr','outfitSlotPickerBox', closeQOutfitsSlotPicker);
 _attachHdrSwipeClose('multiSlotPickerHdr','multiSlotPickerBox',   closeMultiSlotPicker);
 _attachHdrSwipeClose('cpAddModalHdr', 'cpAddModalBox', closeCpAddModal);
+// configPanel: 상단 스와이프 핸들 — 모바일에서만 동작
+_attachHdrSwipeClose('configPanelSwipeHdr', 'configPanel', closeConfigPanel);
 
 function cpThumbFromFile(inp){
   const tab = inp.dataset.tab || 'char';
@@ -10337,12 +10333,7 @@ function setTheme(name){
   setTheme(t);
 })();
 
-function isPWA(){
-  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-}
 function setFullscreen(on){
-  // PWA는 Fullscreen API 호출 불필요 (토글 UI만 동기화)
-  if(isPWA()){ _syncFullscreenToggle(); return; }
   if(on){
     const req = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
     if(req) req.call(document.documentElement).catch(()=>{
@@ -10354,22 +10345,15 @@ function setFullscreen(on){
     if(exit && (document.fullscreenElement || document.webkitFullscreenElement)) exit.call(document);
   }
 }
-// 실제 전체화면 상태 변경 시 토글 동기화 (PWA standalone 포함)
+// 실제 전체화면 상태 변경 시 토글 동기화
 function _syncFullscreenToggle(){
-  const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement) || isPWA();
+  const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
   document.body.classList.toggle('is-fullscreen', isFs);
   const t = document.getElementById('fullscreenToggle');
   if(t) t.checked = isFs;
 }
 document.addEventListener('fullscreenchange',       _syncFullscreenToggle);
 document.addEventListener('webkitfullscreenchange', _syncFullscreenToggle);
-// 초기 로드 시 PWA 상태 반영 — DOMContentLoaded + load 두 번 호출로 타이밍 보완
-document.addEventListener('DOMContentLoaded', _syncFullscreenToggle, {once:true});
-window.addEventListener('load', _syncFullscreenToggle, {once:true});
-// display-mode 변경 감지 (PWA 설치/해제 시)
-try{
-  window.matchMedia('(display-mode: standalone)').addEventListener('change', _syncFullscreenToggle);
-}catch(e){}
 window.addEventListener("orientationchange", ()=>setTimeout(()=>{
   // 방향 전환 시 configPanel 열려있으면 위치 재계산
   const panel = document.getElementById('configPanel');
@@ -11036,6 +11020,10 @@ document.addEventListener('contextmenu', function(e) {
 </div>
 
 <div id="configPanel" style="visibility:hidden;pointer-events:none;opacity:0;transition:opacity .15s;position:fixed;top:44px;right:auto;width:480px;max-height:calc(100vh - 44px);overflow-y:auto;scrollbar-gutter:stable;background:var(--panel);border:1px solid var(--t3);border-radius:0 0 6px 6px;z-index:9500;box-shadow:0 8px 24px rgba(0,0,0,.9);">
+  <!-- 스와이프 닫기 핸들 (모바일) -->
+  <div id="configPanelSwipeHdr" class="mob-only" style="width:100%;display:flex;align-items:center;justify-content:center;padding:6px 0 4px;cursor:ns-resize;flex-shrink:0;touch-action:none;position:sticky;top:0;background:var(--panel);z-index:2;">
+    <div style="width:36px;height:4px;background:var(--b3);border-radius:2px;"></div>
+  </div>
   <div style="padding:14px;display:flex;flex-direction:column;gap:14px;">
 
     <!-- UI 크기 (PC 전용) -->
