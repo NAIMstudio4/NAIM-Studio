@@ -450,8 +450,7 @@ input[type=checkbox]{accent-color:var(--acc);width:14px;height:14px;cursor:point
 
 
 
-#charAddPromptTa,#outfitPresetText{height:220px!important;max-height:220px!important;resize:none!important;}
-#charSlotSelectPanel{height:220px!important;box-sizing:border-box;}
+#outfitPresetText{height:220px!important;max-height:220px!important;resize:none!important;}
 
 /* TEXTAREA 팝업 편집창 */
 #taModal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:9700;opacity:0;pointer-events:none;transition:opacity .2s;}
@@ -559,15 +558,13 @@ input[type=checkbox]{accent-color:var(--acc);width:14px;height:14px;cursor:point
 #charPresetModal.open{opacity:1;pointer-events:all;}
 #charPresetModalBox{background:var(--panel);border:1px solid var(--b2);border-radius:6px;width:min(540px,94vw);height:80vh;overflow:hidden;display:flex;flex-direction:column;}
 #charPresetHdr{padding:10px 16px;background:var(--card2);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-#soloPresetModal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:9850;transition:opacity .2s;}
-#soloPresetModal.open{display:flex;}
 .cp-tab-bar{display:flex;border-bottom:1px solid var(--b1);flex-shrink:0;}
 .cp-tab-btn{flex:1;padding:8px;background:transparent;border:none;color:var(--t3);font-family:var(--font);font-size:11px;font-weight:600;letter-spacing:.1em;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;}
 .cp-tab-btn:hover{color:var(--t2);}
 .cp-tab-btn.active{color:var(--acc);border-bottom-color:var(--acc);}
 .cp-tab-pane{display:none;}
 .cp-tab-pane.active{display:block;overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;overscroll-behavior:contain;}
-#charPresetList,#qoutfitPresetList,#qcharPresetList{display:flex;flex-direction:column;gap:6px;padding:8px;}
+#qoutfitPresetList,#qcharPresetList{display:flex;flex-direction:column;gap:6px;padding:8px;}
 
 .cp-item{background:var(--card);border:1px solid var(--b2);border-radius:4px;overflow:hidden;transition:border-color .15s;}
 .cp-item:hover{border-color:var(--acc);}
@@ -1085,8 +1082,6 @@ img {
 
   #charPresetModal{align-items:flex-end;}
   #charPresetModalBox{width:100%;max-width:100vw;height:calc(88vh - var(--mob-bars-h, 110px));border-radius:14px 14px 0 0;overflow:hidden;margin-bottom:var(--mob-bars-h, 110px);}
-  #soloPresetModal{align-items:flex-end;}
-  #soloPresetModalBox{width:100%;max-width:100vw;height:calc(88vh - var(--mob-bars-h, 110px));border-radius:14px 14px 0 0;overflow:hidden;margin-bottom:var(--mob-bars-h, 110px);}
 
 
   #overwriteDlg{align-items:flex-start;padding-top:18vh;}
@@ -1446,7 +1441,7 @@ img {
         </div>
 
         <div style="display:flex;align-items:center;gap:4px;margin-bottom:6px;">
-          <button class="btn btn-ghost btn-sm btn-sq" onclick="openPresetModal('pos')" style="font-size:14px;min-height:26px;">⭐</button>
+          <button class="btn btn-ghost btn-sm" onclick="openPresetModal('pos')" style="font-size:14px;width:26px;height:26px;min-height:26px;padding:0;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;">⭐</button>
           <span class="sec-title" style="margin-bottom:0;flex:1;">프롬프트</span>
           <button class="btn btn-ghost btn-sm pc-only" onclick="exifFileInput.click()" style="font-size:10px;padding:3px 8px;flex-shrink:0;min-height:26px;" id="exifHeaderBtn" title="EXIF">📎 <span class="sb-txt">EXIF</span></button>
           <span id="activeStyleIndicator" style="display:none;font-size:10px;color:var(--acc);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:80px;flex-shrink:1;cursor:pointer;" title="길게 눌러 해제"></span>
@@ -1466,7 +1461,7 @@ img {
         </div>
         <div id="addPromptPanel" style="display:none;margin-bottom:12px;">
           <div class="row" style="gap:6px;margin-bottom:6px;">
-            <button class="btn btn-ghost btn-sm btn-sq" onclick="openPresetModal('add')" style="font-size:14px;">⭐</button>
+            <button class="btn btn-ghost btn-sm" onclick="openPresetModal('suf')" style="font-size:14px;width:26px;height:26px;min-height:26px;padding:0;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;">⭐</button>
             <input type="checkbox" id="addPromptCheck">
             <label for="addPromptCheck" style="font-size:11px;color:var(--t2);cursor:pointer;flex:1;">생성 시 프롬프트 뒤에 추가</label>
             <button class="btn btn-ghost btn-sm" onclick="loadTxt('addPrompt')" style="font-size:10px;padding:2px 7px;" title="TXT 불러오기">TXT</button>
@@ -1477,7 +1472,7 @@ img {
         </div>
 
         <div style="display:flex;align-items:center;gap:4px;margin-bottom:6px;">
-          <button class="btn btn-ghost btn-sm btn-sq" onclick="openPresetModal('neg')" style="font-size:14px;min-height:26px;">⭐</button>
+          <button class="btn btn-ghost btn-sm" onclick="openPresetModal('neg')" style="font-size:14px;width:26px;height:26px;min-height:26px;padding:0;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;">⭐</button>
           <span class="sec-title" style="margin-bottom:0;flex:1;">네거티브</span>
           <button class="btn btn-ghost btn-sm" onclick="loadTxt('negPrompt')" style="font-size:10px;padding:3px 7px;flex-shrink:0;min-height:26px;" title="TXT 불러오기">TXT</button>
           <button class="btn btn-ghost btn-sm" onclick="clearTa('negPrompt')" style="font-size:13px;padding:3px 7px;flex-shrink:0;min-height:26px;" title="지우기">🗑</button>
@@ -1671,9 +1666,9 @@ img {
           <button class="btn btn-ghost" onclick="openQOutfitsStatusModal()" style="font-size:16px;flex:1;padding:7px;">👗<span class="pc-only"> 적용 확인</span></button>
         </div>
         <div style="display:flex;align-items:center;margin-bottom:8px;">
-          <button class="btn btn-ghost btn-sm btn-sq" onclick="openSoloPresetModal()" style="font-size:14px;">⭐</button>
+          <button class="btn btn-ghost btn-sm" onclick="openPresetModal('cpp')" style="font-size:14px;width:32px;height:32px;min-height:32px;padding:0;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;">⭐</button>
           <button class="btn btn-ghost btn-sm" id="useCoordBtn2" onclick="toggleUseCoords()"
-            style="margin-left:auto;display:flex;align-items:center;gap:4px;font-size:11px;">
+            style="margin-left:auto;display:flex;align-items:center;gap:4px;font-size:11px;height:32px;">
             <span style="font-size:13px;">📍</span>
             <span>위치설정</span>
             <span id="useCoordState2" style="font-weight:700;color:var(--t3);min-width:24px;text-align:center;">OFF</span>
@@ -1792,7 +1787,7 @@ img {
         <button class="btn btn-ghost" onclick="openQOutfitsStatusModal()" style="font-size:14px;flex:1;padding:6px;" title="적용 확인">👗 <span class="sb-txt">적용 확인</span></button>
       </div>
       <div style="display:flex;align-items:center;margin-bottom:4px;">
-        <button class="btn btn-ghost btn-sm btn-sq" onclick="openSoloPresetModal()" style="font-size:14px;">⭐</button>
+        <button class="btn btn-ghost btn-sm" onclick="openPresetModal('cpp')" style="font-size:14px;width:32px;height:32px;min-height:32px;padding:0;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;">⭐</button>
         <button class="btn btn-ghost btn-sm" id="useCoordBtn" onclick="toggleUseCoords()"
           style="margin-left:auto;display:flex;align-items:center;gap:4px;font-size:11px;">
           <span style="font-size:13px;">📍</span>
@@ -2097,7 +2092,7 @@ img {
 <div id="presetModal" onclick="if(event.target===this)closePresetModal()">
   <div id="presetModalBox">
     <div id="presetModalHdr">
-      <span id="presetModalTitle" style="font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--t2);">⭐ 슬롯 프롬프트</span>
+      <span id="presetModalTitle" style="font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--t2);">⭐ 기본 프롬프트</span>
       <div style="display:flex;align-items:center;gap:4px;">
         <button class="btn btn-ghost btn-sm" id="presetSortUpBtn" onclick="presetSortMove(-1)" style="display:none;padding:3px 7px;font-size:12px;" title="위로">▲</button>
         <button class="btn btn-ghost btn-sm" id="presetSortDownBtn" onclick="presetSortMove(1)" style="display:none;padding:3px 7px;font-size:12px;" title="아래로">▼</button>
@@ -2170,7 +2165,7 @@ img {
 <div id="charPresetModal" onclick="if(event.target===this)closeCharPresetModal()">
   <div id="charPresetModalBox">
     <div id="charPresetHdr">
-      <span style="font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--t2);">⭐ 슬롯 프롬프트</span>
+      <span style="font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--t2);">👤 캐릭터 프리셋</span>
       <div style="display:flex;align-items:center;gap:4px;">
         <button class="btn btn-ghost btn-sm" id="cpEditUpBtn" onclick="cpEditMove(-1)" style="display:none;padding:3px 7px;font-size:12px;" title="위로">▲</button>
         <button class="btn btn-ghost btn-sm" id="cpEditDownBtn" onclick="cpEditMove(1)" style="display:none;padding:3px 7px;font-size:12px;" title="아래로">▼</button>
@@ -2184,7 +2179,6 @@ img {
     <div class="cp-tab-bar">
       <button class="cp-tab-btn active" id="cpTab-qchar" onclick="switchCpTab('qchar')">👤 캐릭터 프리셋</button>
       <button class="cp-tab-btn" id="cpTab-qoutfit" onclick="switchCpTab('qoutfit')">👗 의상 프리셋</button>
-      <button class="cp-tab-btn" id="cpTab-char" onclick="switchCpTab('char')">⭐ 슬롯 프롬프트</button>
     </div>
 
     <!-- 검색 -->
@@ -2193,12 +2187,8 @@ img {
     </div>
 
     <!-- 캐릭터 탭 -->
-    <div class="cp-tab-pane active" id="cpPane-char">
-      <div id="charPresetList"></div>
-    </div>
-
     <!-- 캐릭터 탭 -->
-    <div class="cp-tab-pane" id="cpPane-qchar">
+    <div class="cp-tab-pane active" id="cpPane-qchar">
       <div id="qcharPresetList"></div>
     </div>
 
@@ -2212,19 +2202,6 @@ img {
 </div>
 
 <!-- ── 프리셋 전용 모달 ── -->
-<div id="soloPresetModal" onclick="if(event.target===this)closeSoloPresetModal()">
-  <div id="soloPresetModalBox" style="background:var(--panel);border:1px solid var(--b2);border-radius:6px;width:min(540px,94vw);height:80vh;overflow:hidden;display:flex;flex-direction:column;">
-    <div id="soloPresetHdr" style="padding:10px 16px;background:var(--card2);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
-      <span style="font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--t2);">⭐ 슬롯 프롬프트</span>
-      <button class="btn btn-ghost btn-sm" onclick="closeSoloPresetModal()">✕</button>
-    </div>
-    <div style="padding:6px 8px;border-bottom:1px solid var(--b1);flex-shrink:0;">
-      <input class="inp" id="soloPresetSearchInp" type="text" placeholder="🔍 이름으로 검색…" style="width:100%;font-size:12px;" autocomplete="off" oninput="soloPresetSearchFilter(this.value)">
-    </div>
-    <div id="soloPresetList" style="overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;overscroll-behavior:contain;padding:8px;display:block;"></div>
-  </div>
-</div>
-
 <!-- ── 캐릭터 전용 모달 ── -->
 
 
@@ -2257,23 +2234,9 @@ img {
         </div>
       </div>
 
-      <!-- 캐릭터 전용 영역 -->
-      <div id="cpAddCharArea" style="display:flex;flex-direction:column;gap:8px;">
-        <button class="btn btn-ghost btn-sm" id="charSlotToggleBtn" onclick="toggleCharSlotSelect()" style="width:100%;font-size:11px;">👤 슬롯 선택하여 가져오기</button>
-        <!-- 토글 영역: 프롬프트 textarea ↔ 체크박스 UI (동일 크기) -->
-        <div style="position:relative;">
-          <!-- 프롬프트 입력 (기본 표시) -->
-          <textarea class="ta" id="charAddPromptTa" data-no-expand="1"
-            style="height:220px;max-height:220px;resize:none;width:100%;display:block;"
-            placeholder="캐릭터 프롬프트 입력…&#10;저장 후 프리셋창에서 슬롯에 적용하면 해당 캐릭터로 생성됩니다."></textarea>
-          <!-- 슬롯 체크박스 UI (슬롯 버튼 누를 때 표시) -->
-          <div id="charSlotSelectPanel" style="display:none;height:220px;overflow-y:auto;background:var(--card);border:1px solid var(--b2);border-radius:3px;padding:6px;box-sizing:border-box;"></div>
-        </div>
-      </div>
-
       <!-- 의상 전용 영역 -->
       <div id="cpAddOutfitArea" style="display:none;flex-direction:column;gap:8px;">
-        <button class="btn btn-ghost btn-sm" onclick="outfitFromChar()" style="width:100%;font-size:11px;">👤 슬롯 프롬프트에서 가져오기</button>
+        <button class="btn btn-ghost btn-sm" onclick="outfitFromChar()" style="width:100%;font-size:11px;">👤 캐릭터 슬롯에서 가져오기</button>
         <textarea class="ta" id="outfitPresetText" data-no-expand="1" data-modal-title="의상 프롬프트"
           style="height:220px;max-height:220px;resize:none;"
           id="outfitOrCharNewTa" placeholder="태그 입력…"></textarea>
@@ -2379,24 +2342,6 @@ img {
 </div>
 
 <!-- 멀티 슬롯 피커 (캐릭터 다중 선택) -->
-<div id="multiSlotPicker" onclick="if(event.target===this)closeMultiSlotPicker()"
-  style="position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:9900;opacity:0;pointer-events:none;transition:opacity .2s;">
-  <div id="multiSlotPickerBox" style="background:var(--panel);border:1px solid var(--b2);border-radius:6px;min-width:280px;max-height:calc(90vh - var(--mob-bars-h,0px));overflow:hidden;display:flex;flex-direction:column;" onclick="event.stopPropagation()">
-    <div id="multiSlotPickerHdr" style="padding:10px 16px;background:var(--card2);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-radius:6px 6px 0 0;">
-      <span id="multiSlotMsg" style="font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--t2);"></span>
-      <button class="btn btn-ghost btn-sm" onclick="closeMultiSlotPicker()">✕</button>
-    </div>
-    <div style="padding:16px 20px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;flex:1;">
-      <div style="font-size:10px;color:var(--t3);text-align:center;" id="multiSlotHint"></div>
-      <div style="font-size:10px;color:var(--acc);text-align:center;background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.2);border-radius:3px;padding:4px 8px;letter-spacing:.05em;">슬롯을 순서대로 선택 → ✓ 적용</div>
-      <div id="multiSlotGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;"></div>
-      <div style="display:flex;gap:7px;">
-        <button class="btn btn-ghost btn-sm" onclick="closeMultiSlotPicker()" style="flex:1;">취소</button>
-        <button class="btn btn-acc btn-sm" onclick="confirmMultiSlot()" style="flex:2;">✓ 적용</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div id="overwriteDlg">
   <div id="overwriteBox">
@@ -2449,7 +2394,7 @@ img {
   <div id="dataManageBox" style="background:var(--panel);border:1px solid var(--b2);border-radius:8px;width:min(520px,92vw);height:80vh;display:flex;flex-direction:column;overflow:hidden;">
 
     <!-- 헤더 (고정) -->
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px 12px;flex-shrink:0;border-bottom:1px solid var(--b1);background:var(--panel);border-radius:8px 8px 0 0;">
+    <div id="dataManageHdr" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px 12px;flex-shrink:0;border-bottom:1px solid var(--b1);background:var(--panel);border-radius:8px 8px 0 0;">
       <span style="font-size:14px;font-weight:700;letter-spacing:.1em;color:var(--t1);">💾 데이터 관리</span>
       <button class="btn btn-ghost btn-sm" onclick="closeDataManage()">✕</button>
     </div>
@@ -2488,11 +2433,6 @@ img {
           <input type="checkbox" id="dm-inc-add" style="accent-color:var(--acc);">
           <span style="font-size:12px;color:var(--t2);">⭐ 후행 프롬프트 프리셋</span>
           <span id="dm-sz-add" style="font-size:10px;color:var(--t3);font-family:var(--mono);margin-left:auto;"></span>
-        </label>
-        <label class="row" style="gap:8px;cursor:pointer;">
-          <input type="checkbox" id="dm-inc-char" style="accent-color:var(--acc);">
-          <span style="font-size:12px;color:var(--t2);">⭐ 슬롯 프롬프트</span>
-          <span id="dm-sz-char" style="font-size:10px;color:var(--t3);font-family:var(--mono);margin-left:auto;"></span>
         </label>
         <label class="row" style="gap:8px;cursor:pointer;">
           <input type="checkbox" id="dm-inc-charquick" style="accent-color:var(--acc);">
@@ -2992,6 +2932,7 @@ function closeConfigOnOutside(e){
 
 // ── configPanel 오른쪽 스와이프로 닫기 ──
 (function(){
+  function _init(){
   const panel = document.getElementById('configPanel');
   if(!panel) return;
   let _tx=0, _ty=0, _locked=null;
@@ -3028,26 +2969,103 @@ function closeConfigOnOutside(e){
     }
     const dx = e.changedTouches[0].clientX - _tx;
     if(dx > 60){
-      panel.style.transition = 'transform .15s ease, opacity .15s';
-      panel.style.transform = 'translateX(60px)';
+      // opacity만 transition — transform/width 변화로 인한 잔상 방지
+      panel.style.transition = 'opacity .15s';
+      panel.style.transform = '';  // transform 즉시 초기화 (스와이프 중 적용됐던 값 제거)
       panel.style.opacity = '0';
+      panel.style.pointerEvents = 'none';
+      document.getElementById('configBtn').className = 'btn btn-ghost btn-sm';
+      document.removeEventListener('click', closeConfigOnOutside);
       setTimeout(()=>{
         panel.style.visibility = 'hidden';
-        panel.style.pointerEvents = 'none';
+        panel.style.transition = 'none';
         panel.style.width = '';
         panel.style.borderRadius = '';
-        panel.style.transition = '';
-        panel.style.transform = '';
-        panel.style.opacity = '0';
-        document.getElementById('configBtn').className = 'btn btn-ghost btn-sm';
-        document.removeEventListener('click', closeConfigOnOutside);
-      }, 150);
+        requestAnimationFrame(()=>{
+          requestAnimationFrame(()=>{ panel.style.transition = ''; });
+        });
+      }, 160);
     } else {
       panel.style.transition = 'transform .15s ease, opacity .15s';
       panel.style.transform = '';
       panel.style.opacity = '';
     }
   }, {passive:true});
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', _init, {once:true});
+  } else {
+    _init();
+  }
+})();
+
+// ── configPanel 아래 스와이프로 닫기 (패널 전체, 애니메이션) ──
+(function(){
+  function _init(){
+    const panel = document.getElementById('configPanel');
+    if(!panel) return;
+    let _tx=0, _ty=0, _locked=null;
+
+    panel.addEventListener('touchstart', e=>{
+      if(panel.style.visibility === 'hidden') return;
+      // 테마 섹션 영역에서 시작된 터치만 스와이프 닫기 대상
+      const themeSection = document.getElementById('configThemeSection');
+      if(!themeSection || !themeSection.contains(e.target)){ _locked = 'other'; return; }
+      _tx = e.touches[0].clientX;
+      _ty = e.touches[0].clientY;
+      _locked = null;
+    }, {passive:true});
+
+    panel.addEventListener('touchmove', e=>{
+      if(_locked === 'scroll' || _locked === 'x') return;
+      if(_locked === null){
+        const dx = Math.abs(e.touches[0].clientX - _tx);
+        const dy = e.touches[0].clientY - _ty;
+        if(Math.abs(dy) < 6 && dx < 6) return;
+        // 세로로 아래 방향만 닫기 처리 (가로·위 스크롤은 무시)
+        _locked = (dy > 0 && dy > dx) ? 'y' : 'other';
+      }
+      if(_locked !== 'y') return;
+      const dy = e.touches[0].clientY - _ty;
+      if(dy <= 0) return;
+      panel.style.transition = 'none';
+      panel.style.transform = `translateY(${dy / 2}px)`;
+      panel.style.opacity = String(Math.max(0, 1 - dy / 300));
+    }, {passive:true});
+
+    panel.addEventListener('touchend', e=>{
+      if(_locked !== 'y'){
+        return;
+      }
+      const dy = e.changedTouches[0].clientY - _ty;
+      if(dy > 60){
+        panel.style.transition = 'opacity .15s';
+        panel.style.transform = '';
+        panel.style.opacity = '0';
+        panel.style.pointerEvents = 'none';
+        document.getElementById('configBtn').className = 'btn btn-ghost btn-sm';
+        document.removeEventListener('click', closeConfigOnOutside);
+        setTimeout(()=>{
+          panel.style.visibility = 'hidden';
+          panel.style.transition = 'none';
+          panel.style.width = '';
+          panel.style.borderRadius = '';
+          requestAnimationFrame(()=>{
+            requestAnimationFrame(()=>{ panel.style.transition = ''; });
+          });
+        }, 160);
+      } else {
+        panel.style.transition = 'transform .15s ease, opacity .15s';
+        panel.style.transform = '';
+        panel.style.opacity = '';
+      }
+    }, {passive:true});
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', _init, {once:true});
+  } else {
+    _init();
+  }
 })();
 
 // ── dataManageModal 오른쪽 스와이프로 닫기 ──
@@ -3062,7 +3080,6 @@ function closeConfigOnOutside(e){
     _tx = e.touches[0].clientX;
     _ty = e.touches[0].clientY;
     _locked = null;
-    inner.style.transition = 'none';
   }, {passive:false});
 
   inner.addEventListener('touchmove', e=>{
@@ -3070,6 +3087,7 @@ function closeConfigOnOutside(e){
       const dx = e.touches[0].clientX - _tx;
       const dy = Math.abs(e.touches[0].clientY - _ty);
       _locked = Math.abs(dx) > dy ? 'x' : 'y';
+      if(_locked === 'x') inner.style.transition = 'none';
     }
     if(_locked !== 'x') return;
     e.preventDefault();
@@ -3121,7 +3139,7 @@ function closeConfigOnOutside(e){
     inner.addEventListener('touchstart', e=>{
       if(modal.style.pointerEvents === 'none') return;
       // 슬롯픽창/추가모달 등 상위 z-index 모달이 열려있으면 무시
-      const blockers = ['charSlotPicker','outfitSlotPicker','multiSlotPicker',
+      const blockers = ['charSlotPicker','outfitSlotPicker',
                         'cpAddModal','cpGalleryPicker','charStatusModal','outfitStatusModal'];
       const blocked = blockers.some(id=>{
         if(id === modalId) return false; // 자기 자신 제외
@@ -3709,7 +3727,6 @@ async function callNAI(userPrompt, apiKey, snap){
     if(charNew && charNew.text) prompt = charNew.text;
     // 2. 퀵의상
     if(outfit && outfit.text) prompt = prompt ? prompt + '\n' + outfit.text : outfit.text;
-    // 3. 슬롯 프롬프트
     if(c.prompt) prompt = prompt ? prompt + '\n' + c.prompt : c.prompt;
     if(prompt === (c.prompt||'')) return c;
     return {...c, prompt};
@@ -4248,7 +4265,7 @@ async function serverLoadSettings(){
 
       // localStorage에 병합 후 재적용
       const keys = ['nai_studio_v3','nai_presets_pos','nai_presets_neg',
-                    'nai_presets_add','nai_presets_char','nai_presets_charquick','nai_presets_outfitquick','nai_presets_style'];
+                    'nai_presets_add','nai_presets_charquick','nai_presets_outfitquick','nai_presets_style'];
       keys.forEach(k=>{ if(data.data[k] !== undefined) localStorage.setItem(k, JSON.stringify(data.data[k])); });
       if(data.data._settings) localStorage.setItem('nai_studio_v3', JSON.stringify(data.data._settings));
 
@@ -4269,7 +4286,7 @@ async function serverSaveSettings(){
   if(!_localSaveAvailable) return;
   try{
     const keys = ['nai_studio_v3','nai_presets_pos','nai_presets_neg',
-                  'nai_presets_add','nai_presets_char','nai_presets_charquick','nai_presets_outfitquick','nai_presets_style'];
+                  'nai_presets_add','nai_presets_charquick','nai_presets_outfitquick','nai_presets_style'];
     const payload = {};
     keys.forEach(k=>{ try{ payload[k]=JSON.parse(localStorage.getItem(k)||'null'); }catch{} });
     await fetchWithTimeout('/api/settings', {
@@ -4640,10 +4657,6 @@ document.addEventListener('keydown',e=>{
     // 의상 현황판 (9800)
     if(document.getElementById('outfitStatusModal')?.style.opacity==='1'){
       closeQOutfitsStatusModal(); return;
-    }
-    // 멀티슬롯 피커 (9800)
-    if(document.getElementById('multiSlotPicker')?.style.opacity==='1'){
-      closeMultiSlotPicker(); return;
     }
     // 슬롯 피커 (9800)
     if(document.getElementById('slotPicker')?.style.opacity==='1'){
@@ -6408,13 +6421,11 @@ function importAllData(inp){
       if(data.presets_pos){    localStorage.setItem('nai_presets_pos',    JSON.stringify(data.presets_pos));    _setPresetsCache('pos', data.presets_pos); }
       if(data.presets_neg){    localStorage.setItem('nai_presets_neg',    JSON.stringify(data.presets_neg));    _setPresetsCache('neg', data.presets_neg); }
       if(data.presets_add){    localStorage.setItem('nai_presets_add',    JSON.stringify(data.presets_add));    _setPresetsCache('add', data.presets_add); }
-      if(data.presets_char){      localStorage.setItem('nai_presets_char',        JSON.stringify(data.presets_char));      saveCharPresets(data.presets_char); }
       if(data.presets_charquick){ localStorage.setItem('nai_presets_charquick',   JSON.stringify(data.presets_charquick)); _saveCharNewPresetsCache(data.presets_charquick); }
       if(data.presets_outfit){    localStorage.setItem('nai_presets_outfitquick', JSON.stringify(data.presets_outfit));    _saveOutfitPresetsCache(data.presets_outfit); }
       if(data.styles)          localStorage.setItem('nai_presets_style',  JSON.stringify(data.styles));
       // UI 즉시 갱신
       if(document.getElementById('presetList'))    renderPresetList();
-      if(document.getElementById('charPresetList')) renderCharPresetList();
       if(document.getElementById('qcharPresetList')) renderQCharPresetList();
       if(document.getElementById('qoutfitPresetList')) renderQOutfitPresetList();
       if(document.getElementById('styleList')) renderStyleList();
@@ -6964,14 +6975,14 @@ function styleImgNav(dir){
 }
 
 // ─────────────── 프롬프트 프리셋 ───────────────
-const PRESET_KEY_CHAR = 'nai_presets_char';
+
 
 // ── 프리셋 서버 API ──────────────────────────────────────
 // 서버 사용 가능 시 개별 JSON 파일로 저장, 아니면 localStorage 폴백
 
 const PRESET_LS_KEYS = {
   pos: 'nai_presets_pos', neg: 'nai_presets_neg',
-  add: 'nai_presets_add', char: 'nai_presets_char',
+  add: 'nai_presets_add',
   character: 'nai_presets_charquick',
   outfit: 'nai_presets_outfitquick'
 };
@@ -7060,85 +7071,6 @@ function closeSlotPicker(){
   if(_slotPickerCancelCb){ const cb=_slotPickerCancelCb; _slotPickerCancelCb=null; cb(); }
 }
 
-// ── 멀티 슬롯 피커 ──
-let _multiSlotCb = null;
-let _multiSlotCancelCb = null;
-let _multiSlotSelected = []; // 선택 순서 배열
-
-function openMultiSlotPicker(title, hint, presetChars, cb, cancelCb){
-  _multiSlotCb = cb;
-  _multiSlotCancelCb = cancelCb || null;
-  _multiSlotSelected = [];
-  document.getElementById('multiSlotMsg').textContent = title;
-  document.getElementById('multiSlotHint').textContent = hint;
-  const grid = document.getElementById('multiSlotGrid');
-  grid.innerHTML = '';
-  for(let i=0; i<6; i++){
-    const c = chars[i];
-    const hasData = c.enabled || c.prompt.trim();
-    const btn = document.createElement('button');
-    btn.id = `msp-btn-${i}`;
-    btn.className = 'btn btn-ghost btn-sm';
-    btn.style.cssText = `position:relative;width:100%;aspect-ratio:1;padding:4px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:all .15s;${hasData?'border-color:var(--acc);':''}${!hasData?'opacity:.45;':''}`;
-    const thumbDiv = document.createElement('div');
-    thumbDiv.style.cssText = `width:44px;height:44px;border-radius:3px;flex-shrink:0;background:var(--b2) center/cover no-repeat;border:1px solid ${hasData?'var(--acc)':'var(--b2)'};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--acc);font-family:var(--mono);`;
-    thumbDiv.textContent = 'C'+(i+1);
-    btn.appendChild(thumbDiv);
-    btn.dataset.slot = i;
-    btn.onclick = ()=>{ if(!hasData) return; _multiSlotToggle(i, btn, presetChars.length); };
-    grid.appendChild(btn);
-  }
-  const el = document.getElementById('multiSlotPicker');
-  el.style.opacity='1'; el.style.pointerEvents='all';
-}
-
-function _multiSlotToggle(slotIdx, btn, maxCount){
-  const pos = _multiSlotSelected.indexOf(slotIdx);
-  if(pos >= 0){
-    _multiSlotSelected.splice(pos, 1);
-  } else {
-    if(_multiSlotSelected.length >= maxCount){
-      toast(`최대 ${maxCount}개까지 선택 가능합니다`,'err'); return;
-    }
-    _multiSlotSelected.push(slotIdx);
-  }
-  _multiSlotRedrawBadges();
-}
-
-function _multiSlotRedrawBadges(){
-  for(let i=0; i<6; i++){
-    const btn = document.getElementById(`msp-btn-${i}`);
-    if(!btn) continue;
-    const order = _multiSlotSelected.indexOf(i);
-    const hasData = chars[i].enabled || chars[i].prompt.trim();
-    const thumbDiv = btn.querySelector('div');
-    if(order >= 0){
-      // 선택됨 → 순서 번호로 교체
-      if(thumbDiv) thumbDiv.textContent = order+1;
-      btn.style.background = 'rgba(255,107,53,.25)';
-      btn.style.borderColor = 'var(--acc)';
-    } else {
-      // 미선택 → C번호 복원
-      if(thumbDiv) thumbDiv.textContent = 'C'+(i+1);
-      btn.style.background = '';
-      btn.style.borderColor = hasData ? 'var(--acc)' : '';
-    }
-  }
-}
-
-function confirmMultiSlot(){
-  if(!_multiSlotSelected.length){ toast('슬롯을 선택하세요','err'); return; }
-  _multiSlotCancelCb = null; // 적용 시엔 취소 콜백 안 씀
-  closeMultiSlotPicker();
-  if(_multiSlotCb) _multiSlotCb([..._multiSlotSelected]);
-}
-
-function closeMultiSlotPicker(){
-  const el = document.getElementById('multiSlotPicker');
-  el.style.opacity='0'; el.style.pointerEvents='none';
-  _multiSlotSelected = [];
-  if(_multiSlotCancelCb){ const cb=_multiSlotCancelCb; _multiSlotCancelCb=null; cb(); }
-}
 
 // ── 의상 프리셋: 캐릭터에서 가져오기 ──
 function outfitFromChar(){
@@ -7156,51 +7088,6 @@ function outfitFromChar(){
 }
 
 // ── 캐릭터 슬롯 선택 저장 (charPresetSaveRow) ──
-let _charSlotMode = false; // false=textarea, true=checkbox
-
-function toggleCharSlotSelect(){
-  const panel  = document.getElementById('charSlotSelectPanel');
-  const ta     = document.getElementById('charAddPromptTa');
-  const btn    = document.getElementById('charSlotToggleBtn');
-  _charSlotMode = !_charSlotMode;
-
-  if(_charSlotMode){
-    // 체크박스 UI 렌더 (기본 전체 해제)
-    panel.innerHTML = chars.map((c,i)=>{
-      const nameEl = document.getElementById('cn'+i);
-      const name   = (nameEl ? nameEl.value.trim() : '') || c.name || '';
-      const promptEl = _charEl('cp'+i);
-      const prompt = (promptEl ? promptEl.value : c.prompt||'').trim();
-      const preview = prompt.slice(0,32)+(prompt.length>32?'…':'');
-      return '<label style="display:flex;align-items:center;gap:7px;cursor:pointer;padding:5px 4px;border-bottom:1px solid var(--b1);">'
-        +'<input type="checkbox" data-slot="'+i+'" style="accent-color:var(--acc);flex-shrink:0;">'
-        +'<span style="font-size:11px;font-weight:700;color:var(--acc);font-family:var(--mono);flex-shrink:0;">C'+(i+1)+'</span>'
-        +(name?'<span style="font-size:11px;color:var(--t2);flex-shrink:0;">'+esc(name)+'</span>':'')
-        +'<span style="font-size:10px;color:var(--t3);font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">'+(esc(preview)||'(비어있음)')+'</span>'
-        +'</label>';
-    }).join('')
-    + '<div style="display:flex;gap:5px;padding:6px 2px 2px;">'
-    + '<button class="btn btn-ghost btn-sm" onclick="charSlotSelectAll(true)" style="flex:1;font-size:10px;padding:3px;">전체선택</button>'
-    + '<button class="btn btn-ghost btn-sm" onclick="charSlotSelectAll(false)" style="flex:1;font-size:10px;padding:3px;">해제</button>'
-    + '</div>';
-    panel.style.display = 'block';
-    ta.style.display    = 'none';
-    btn.classList.add('active');
-    btn.style.borderColor = 'var(--acc)';
-    btn.style.color = 'var(--acc)';
-  } else {
-    panel.style.display = 'none';
-    ta.style.display    = 'block';
-    btn.classList.remove('active');
-    btn.style.borderColor = '';
-    btn.style.color = '';
-  }
-}
-
-function charSlotSelectAll(checked){
-  document.querySelectorAll('#charSlotSelectPanel input[type=checkbox]').forEach(function(cb){ cb.checked=checked; });
-}
-
 // ── 추가/덮어씌우기 공용 다이얼로그 ──
 function showOverwriteDlg(msg, opts){
   // opts: [{label, className, cb}, ...]
@@ -7222,13 +7109,7 @@ function closeOverwriteDlg(){
 }
 
 function openPresetModal(type){
-  _presetTarget = type;
-  const titles = {pos:'⭐ 기본 프롬프트 프리셋', neg:'⭐ 네거티브 프리셋', add:'⭐ 후행 프롬프트 프리셋'};
-  document.getElementById('presetModalTitle').textContent = titles[type] || '⭐ 캐릭터 슬롯';
-  document.getElementById('presetNameInp').value = '';
-  renderPresetList();
-  _resetModalBox('presetModalBox');
-  document.getElementById('presetModal').classList.add('open');
+  // 기능 비활성화 — 버튼/함수 유지용 no-op (나중에 기능 복구 시 이 함수 내용 복원)
 }
 function closePresetModal(){
   document.getElementById('presetModal').classList.remove('open');
@@ -7351,8 +7232,7 @@ function toggleCpEditMode(){
   } else {
     toast('정렬이 저장되었습니다', 'ok');
   }
-  if(_cpActiveTab==='char') renderCharPresetList();
-  else if(_cpActiveTab==='qchar') renderQCharPresetList();
+  if(_cpActiveTab==='qchar') renderQCharPresetList();
   else renderQOutfitPresetList();
 }
 
@@ -7369,23 +7249,14 @@ function _updateCpSortUI(){
 function cpEditSelect(i){
   if(!_cpEditMode) return false;
   _cpEditSel = i;
-  if(_cpActiveTab==='char') renderCharPresetList();
-  else if(_cpActiveTab==='qchar') renderQCharPresetList();
+  if(_cpActiveTab==='qchar') renderQCharPresetList();
   else renderQOutfitPresetList();
   return true;
 }
 
 function cpEditMove(dir){
   if(!_cpEditMode || _cpEditSel < 0){ toast('먼저 카드를 선택하세요', 'err'); return; }
-  if(_cpActiveTab==='char'){
-    const list = getCharPresets();
-    const newIdx = _cpEditSel + dir;
-    if(newIdx < 0 || newIdx >= list.length) return;
-    [list[_cpEditSel], list[newIdx]] = [list[newIdx], list[_cpEditSel]];
-    saveCharPresets(list);
-    _cpEditSel = newIdx;
-    renderCharPresetList();
-  } else if(_cpActiveTab==='qchar'){
+  if(_cpActiveTab==='qchar'){
     const list = getQCharPresets();
     const newIdx = _cpEditSel + dir;
     if(newIdx < 0 || newIdx >= list.length) return;
@@ -7533,16 +7404,8 @@ async function deletePreset(i){
 }
 
 // ── 캐릭터 프리셋 ──
-function getCharPresets(){
-  try{ return JSON.parse(localStorage.getItem(PRESET_KEY_CHAR))||[]; }
-  catch{ return []; }
-}
-function saveCharPresets(list){ // 내부용 (캐시만)
-  try{ localStorage.setItem(PRESET_KEY_CHAR, JSON.stringify(list)); }catch{}
-}
-
 // ── 캐릭터/의상 프리셋 탭 ──
-let _cpActiveTab = 'char';
+let _cpActiveTab = 'qchar';
 
 // ── 추가 모달 ──
 let _cpAddTab = 'char';
@@ -7563,18 +7426,9 @@ function openCpAddModal(){
   // 의상 텍스트 초기화
   document.getElementById('outfitPresetText').value = '';
   // 탭별 영역 전환
-  document.getElementById('cpAddCharArea').style.display   = _cpAddTab==='char'    ? 'flex' : 'none';
-  document.getElementById('cpAddOutfitArea').style.display  = (_cpAddTab==='qoutfit'||_cpAddTab==='qchar') ? 'flex' : 'none';
+  document.getElementById('cpAddOutfitArea').style.display  = 'flex';
   // 타이틀
-  document.getElementById('cpAddModalTitle').textContent = _cpAddTab==='char' ? '＋ 프리셋 추가' : _cpAddTab==='qchar' ? '＋ 캐릭터 프리셋 추가' : '＋ 의상 프리셋 추가';
-  // 슬롯/textarea 초기화
-  _charSlotMode = false;
-  const sp = document.getElementById('charSlotSelectPanel');
-  const ta = document.getElementById('charAddPromptTa');
-  const tb = document.getElementById('charSlotToggleBtn');
-  if(sp) sp.style.display = 'none';
-  if(ta){ ta.style.display = 'block'; ta.value = ''; }
-  if(tb){ tb.classList.remove('active'); tb.style.borderColor=''; tb.style.color=''; }
+  document.getElementById('cpAddModalTitle').textContent = _cpAddTab==='qchar' ? '＋ 캐릭터 프리셋 추가' : '＋ 의상 프리셋 추가';
   // textarea 더블탭/더블클릭 → taModal (initTaModalTrigger가 자동 처리)
   const _cpAddEl = document.getElementById('cpAddModal');
   _cpAddEl.style.opacity = '1';
@@ -7655,34 +7509,7 @@ function cpAddClearThumb(){
 async function cpAddSave(){
   const name = document.getElementById('cpAddNameInp').value.trim();
   if(!name){ toast('이름을 입력하세요','err'); return; }
-  if(_cpAddTab === 'char'){
-    // 슬롯 체크박스 모드면 체크 상태 반영
-    const cbs = document.querySelectorAll('#charSlotSelectPanel input[type=checkbox]');
-    if(_charSlotMode && cbs.length){
-      cbs.forEach(cb=>{ chars[parseInt(cb.dataset.slot)].enabled = cb.checked; });
-      applyCharsToUI();
-      saveSettings();
-    }
-    // textarea 모드면 C1 프롬프트만 반영 (직접 입력)
-    if(!_charSlotMode){
-      const taVal = (document.getElementById('charAddPromptTa')?.value||'').trim();
-      if(taVal){
-        chars[0].prompt  = taVal;
-        chars[0].enabled = true;
-        // 나머지 비활성화
-        for(let i=1;i<chars.length;i++) chars[i].enabled=false;
-        applyCharsToUI(); saveSettings();
-      }
-    }
-    const snapshot = chars.map(c=>({...c, pos:{...c.pos}}));
-    const preset = {name, chars:snapshot, useCoords:_useCoords, thumb:_cpAddThumbData||null};
-    const list = getCharPresets();
-    if(_cpEditPresetIdx >= 0) list[_cpEditPresetIdx] = preset;
-    else { const existing = list.findIndex(p=>p.name===name); if(existing>=0) list[existing]=preset; else list.push(preset); }
-    saveCharPresets(list);
-    await serverSavePreset('char', preset);
-    renderCharPresetList();
-  } else if(_cpAddTab === 'qchar'){
+  if(_cpAddTab === 'qchar'){
     const text = document.getElementById('outfitPresetText').value.trim();
     if(!text){ toast('캐릭터 프롬프트가 비어있습니다','err'); return; }
     const preset = {name, text, thumb:_cpAddThumbData||null};
@@ -7721,7 +7548,6 @@ async function cpAddSave(){
     const cpm = document.getElementById('charPresetModal');
     if(cpm && !cpm.classList.contains('open')){
       const tab = _cpAddTab;
-      renderCharPresetList();
       renderQCharPresetList();
       renderQOutfitPresetList();
       switchCpTab(tab);
@@ -7742,8 +7568,7 @@ function switchCpTab(tab){
   // 헤더 타이틀 업데이트
   const title = document.querySelector('#charPresetHdr span');
   if(title){
-    if(tab==='char')     title.textContent = '⭐ 슬롯 프롬프트';
-    else if(tab==='qchar') title.textContent = '👤 캐릭터 프리셋';
+    if(tab==='qchar') title.textContent = '👤 캐릭터 프리셋';
     else                 title.textContent = '👗 의상 프리셋';
   }
   // 편집/정렬 버튼: 프리셋 탭만 (qchar, qoutfit은 별도)
@@ -7761,14 +7586,12 @@ function switchCpTab(tab){
   // 추가 버튼 동작 연결
   const addBtn = document.getElementById('cpAddBtn');
   if(addBtn){
-    if(tab==='char')     addBtn.onclick = ()=>openCpAddModal();
-    else if(tab==='qchar') addBtn.onclick = ()=>{ _cpAddTab='qchar'; openCpAddModal(); };
-    else                 addBtn.onclick = ()=>{ _cpAddTab='qoutfit'; openCpAddModal(); };
+    if(tab==='qchar') addBtn.onclick = ()=>{ _cpAddTab='qchar'; openCpAddModal(); };
+    else              addBtn.onclick = ()=>{ _cpAddTab='qoutfit'; openCpAddModal(); };
   }
 
   // 렌더링
-  if(tab==='char') renderCharPresetList();
-  else if(tab==='qchar') renderQCharPresetList();
+  if(tab==='qchar') renderQCharPresetList();
   else renderQOutfitPresetList();
 }
 
@@ -7783,8 +7606,7 @@ function cpSearchFilter(val){
     _cpSearchMode = 'name';
     _cpSearchQuery = raw.toLowerCase();
   }
-  if(_cpActiveTab==='char') renderCharPresetList();
-  else if(_cpActiveTab==='qchar') renderQCharPresetList();
+  if(_cpActiveTab==='qchar') renderQCharPresetList();
   else renderQOutfitPresetList();
 }
 function _cpMatchPrompt(p, q){
@@ -7811,7 +7633,6 @@ function openCharPresetModal(tab, slot){
     const kind = tab === 'qoutfit' ? '의상' : '캐릭터';
     toast(`C${_cpSoloSlot+1}에 적용할 ${kind}을 선택하세요`, 'info');
   }
-  renderCharPresetList();
   renderQCharPresetList();
   renderQOutfitPresetList();
   switchCpTab(tab || 'qchar');
@@ -7899,16 +7720,13 @@ _attachHdrSwipeClose('sessionModalHdr', 'sessionModalBox',    closeSessionModal)
 _attachHdrSwipeClose('sesExportHdr',    'sesExportModalBox',  closeSesExportModal);
 _attachHdrSwipeClose('charPresetHdr',   'charPresetModalBox', closeCharPresetModal);
 _attachHdrSwipeClose('cpGalleryPickerHdr', 'cpGalleryPickerBox', closeCpGalleryPicker);
-_attachHdrSwipeClose('soloPresetHdr',  'soloPresetModalBox',  closeSoloPresetModal);
 _attachHdrSwipeClose('posGridHdr', 'posGrid', ()=>document.getElementById('posGrid').classList.remove('open'));
 _attachHdrSwipeClose('charStatusHdr',     'charStatusBox',        closeQCharsStatusModal);
 _attachHdrSwipeClose('outfitStatusHdr',   'outfitStatusBox',      closeQOutfitsStatusModal);
 _attachHdrSwipeClose('charSlotPickerHdr', 'charSlotPickerBox',    closeQCharsSlotPicker);
 _attachHdrSwipeClose('outfitSlotPickerHdr','outfitSlotPickerBox', closeQOutfitsSlotPicker);
-_attachHdrSwipeClose('multiSlotPickerHdr','multiSlotPickerBox',   closeMultiSlotPicker);
 _attachHdrSwipeClose('cpAddModalHdr', 'cpAddModalBox', closeCpAddModal);
-// configPanel: 상단 스와이프 핸들 — 모바일에서만 동작
-_attachHdrSwipeClose('configPanelSwipeHdr', 'configPanel', closeConfigPanel);
+_attachHdrSwipeClose('dataManageHdr', 'dataManageBox', closeDataManage);
 
 function cpThumbFromFile(inp){
   const tab = inp.dataset.tab || 'char';
@@ -7982,32 +7800,6 @@ function closeCpThumbViewer(){
 })();
 
 // ── 캐릭터 프리셋 ──
-function renderCharPresetList(){
-  const allList=getCharPresets();
-  const list=_cpSearchQuery ? allList.filter(p=> _cpSearchMode==='prompt' ? _cpMatchPrompt(p,_cpSearchQuery) : p.name.toLowerCase().includes(_cpSearchQuery)) : allList;
-  const el=document.getElementById('charPresetList');
-  if(!allList.length){
-    el.innerHTML='<div style="font-size:11px;color:var(--t3);text-align:center;padding:24px;">저장된 슬롯 프롬프트 없음<br><span style="font-size:10px;">상단 ＋ 추가 버튼으로 저장하세요</span></div>';
-    return;
-  }
-  if(!list.length){
-    el.innerHTML='<div style="font-size:11px;color:var(--t3);text-align:center;padding:24px;">검색 결과 없음</div>';
-    return;
-  }
-  el.innerHTML=list.map((p,i)=>{
-    const realIdx=allList.indexOf(p);
-    const enabledChars=p.chars.filter(c=>c.enabled);
-    const thumbHtml=p.thumb
-      ?`<div class="cp-item-thumb" style="background-image:url('${p.thumb}')" onclick="event.stopPropagation();openCpThumbViewer('${p.thumb}')"></div>`
-      :`<div class="cp-item-thumb empty" onclick="event.stopPropagation();toast('미리보기 없음')">👤</div>`;
-    return `<div class="cp-item" onclick="_cpEditMode ? cpEditSelect(${realIdx}) : loadCharPreset(${realIdx})" style="cursor:pointer;${_cpEditMode && _cpEditSel===realIdx ? 'border-color:var(--acc);background:rgba(255,107,53,.1);' : ''}">
-      <div class="cp-item-hdr">${thumbHtml}<span class="cp-item-name">${esc(p.name)}</span><span class="cp-item-meta">${enabledChars.length}캐릭터</span>
-        <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();openCpEditPreset(${realIdx},'char')" style="font-size:10px;padding:2px 8px;flex-shrink:0;${_cpEditMode?'display:none':''}">수정</button>
-        <button class="btn btn-red btn-sm" onclick="event.stopPropagation();deleteCharPreset(${realIdx})" style="font-size:10px;padding:2px 8px;flex-shrink:0;${_cpEditMode?'':'display:none'}">삭제</button></div>
-    </div>`;
-  }).join('');
-}
-
 // ── 의상 프리셋 ──
 const PRESET_KEY_OUTFIT = 'nai_presets_outfitquick';
 function getQOutfitPresets(){ try{ return JSON.parse(localStorage.getItem(PRESET_KEY_OUTFIT))||[]; }catch{ return []; } }
@@ -8022,14 +7814,7 @@ async function cpAddDelete(){
   const idx = _cpEditPresetIdx;
   showConfirm('이 프리셋을 삭제하시겠습니까?', async()=>{
     closeCpAddModal();
-    if(type === 'char'){
-      const list = getCharPresets();
-      const name = list[idx]?.name;
-      list.splice(idx, 1);
-      saveCharPresets(list);
-      if(name) await serverDeletePreset('char', name).catch(()=>{});
-      renderCharPresetList();
-    } else if(type === 'qchar'){
+    if(type === 'qchar'){
       const list = getQCharPresets();
       const name = list[idx]?.name;
       list.splice(idx, 1);
@@ -8043,6 +7828,14 @@ async function cpAddDelete(){
       _saveOutfitPresetsCache(list);
       if(name) await serverDeletePreset('outfit', name).catch(()=>{});
       renderQOutfitPresetList();
+    }
+    // charPresetModal 복원 (cpAddSave와 동일)
+    const cpm = document.getElementById('charPresetModal');
+    if(cpm && !cpm.classList.contains('open')){
+      renderQCharPresetList();
+      renderQOutfitPresetList();
+      switchCpTab(type);
+      cpm.classList.add('open');
     }
     toast('삭제됨', 'ok');
   });
@@ -8058,22 +7851,15 @@ function openCpEditPreset(i, type){
   const delBtn = document.getElementById('cpAddDelBtn');
   if(delBtn) delBtn.style.display = '';
   // 기존 데이터 로드
-  const list = type === 'char' ? getCharPresets() : type === 'qchar' ? getQCharPresets() : getQOutfitPresets();
+  const list = type === 'qchar' ? getQCharPresets() : getQOutfitPresets();
   const p = list[i];
   if(!p) return;
   // 이름 채우기
   const nameInp = document.getElementById('cpAddNameInp');
   if(nameInp) nameInp.value = p.name;
   // 프롬프트/텍스트 채우기
-  if(type === 'char'){
-    p.chars.forEach((c,ci)=>{
-      const cp = document.getElementById('cp_add_'+ci);
-      if(cp) cp.value = c.prompt||'';
-    });
-  } else {
-    const ta = document.getElementById('outfitPresetText');
-    if(ta){ ta.value = p.text||''; ta.dispatchEvent(new Event('input')); }
-  }
+  const ta = document.getElementById('outfitPresetText');
+  if(ta){ ta.value = p.text||''; ta.dispatchEvent(new Event('input')); }
   // 썸네일 미리보기
   if(p.thumb){
     _cpAddThumbData = p.thumb;
@@ -8384,44 +8170,6 @@ function closeQOutfitsStatusModal(){
 let _qOutfitsTargetSlot = -1;
 
 // ── 프리셋 전용 모달 ──
-let _soloPresetSearch = '';
-function openSoloPresetModal(){
-  _soloPresetSearch = '';
-  const inp = document.getElementById('soloPresetSearchInp');
-  if(inp) inp.value = '';
-  renderSoloPresetList();
-  document.getElementById('soloPresetModal').classList.add('open');
-}
-function closeSoloPresetModal(){
-  document.getElementById('soloPresetModal').classList.remove('open');
-}
-function soloPresetSearchFilter(val){
-  _soloPresetSearch = (val||'').trim().toLowerCase();
-  renderSoloPresetList();
-}
-function renderSoloPresetList(){
-  const list = getCharPresets();
-  const el = document.getElementById('soloPresetList');
-  if(!el) return;
-  const filtered = _soloPresetSearch ? list.filter(p=>p.name.toLowerCase().includes(_soloPresetSearch)) : list;
-  if(!filtered.length){ el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--t3);font-size:12px;">프리셋 없음</div>'; return; }
-  el.innerHTML = filtered.map((p,i)=>{
-    const realIdx = list.indexOf(p);
-    const thumb = p.thumb
-      ? `<div class="cp-item-thumb" style="background-image:url('${p.thumb}')"></div>`
-      : `<div class="cp-item-thumb empty">⭐</div>`;
-    return `<div class="cp-item" onclick="loadCharPresetSolo(${realIdx})" style="cursor:pointer;">
-      <div class="cp-item-hdr">${thumb}<span class="cp-item-name">${esc(p.name)}</span></div>
-    </div>`;
-  }).join('');
-}
-function loadCharPresetSolo(i){
-  closeSoloPresetModal();
-  loadCharPreset(i);
-}
-
-
-
 function updateQOutfitsThumb(i){
   const _updateThumb = (prefix)=>{
     // 캐릭터 썸네일 (qchar)
@@ -8557,7 +8305,7 @@ async function deleteOutfitPreset(i){
   });
 }
 
-// ── 캐릭터 프리셋 (nai_presets_char) — 의상과 완전 독립 ──
+// ── 캐릭터 프리셋 (nai_presets_charquick) ──
 const PRESET_KEY_CHAR_NEW = 'nai_presets_charquick';
 function getQCharPresets(){ try{ return JSON.parse(localStorage.getItem(PRESET_KEY_CHAR_NEW))||[]; }catch{ return []; } }
 function _saveCharNewPresetsCache(list){ try{ localStorage.setItem(PRESET_KEY_CHAR_NEW,JSON.stringify(list)); }catch{} }
@@ -8718,95 +8466,6 @@ async function deleteCharNewPreset(i){
     if(changed){ updateAllQCharsThumbs(); saveSettings(); }
     renderQCharPresetList();
   });
-}
-
-async function deleteCharPreset(i){
-  const list=getCharPresets();
-  const name=list[i]?.name||'이 프리셋';
-  showConfirm(`"${name}"을 삭제하시겠습니까?`, async()=>{
-    list.splice(i,1);
-    saveCharPresets(list);
-    if(name) await serverDeletePreset('char', name);
-    renderCharPresetList();
-  });
-}
-
-function loadCharPreset(i){
-  const list = getCharPresets();
-  const p = list[i];
-  if(!p) return;
-  // charPresetModal은 실제 적용 시에만 닫음
-
-  showOverwriteDlg(`"${p.name}" 슬롯 프롬프트를 어떻게 불러올까요?`, [
-    {label:'📄 프롬프트 보기', className:'btn-ghost', cb:()=>{
-      const text = p.chars.map((c,ci)=>{
-        if(!c.enabled && !(c.prompt||'').trim()) return '';
-        return `[C${ci+1}${c.name?': '+c.name:''}]\n${c.prompt||''}`;
-      }).filter(Boolean).join('\n\n');
-      openPresetTextViewModal(
-        text,
-        `${p.name} — 캐릭터 프롬프트`,
-        (newText)=>{
-          const sections = newText.split(/\[C(\d+)(?::[^\]]*)?\]/);
-          for(let k=1; k<sections.length-1; k+=2){
-            const ci = parseInt(sections[k])-1;
-            const prompt = sections[k+1].trim();
-            if(ci>=0 && ci<p.chars.length) p.chars[ci].prompt = prompt;
-          }
-          const list2=getCharPresets();
-          const idx2=list2.findIndex(x=>x.name===p.name);
-          if(idx2>=0){ list2[idx2]=p; saveCharPresets(list2); clearTimeout(saveSettings._timer); saveSettings._timer=setTimeout(()=>serverSaveSettings(),800); }
-          renderCharPresetList();
-          loadCharPreset(i);
-        },
-        ()=>{ loadCharPreset(i); }
-      );
-    }},
-    {label:'➕ 빈 슬롯에 추가', className:'btn-acc', cb:()=>{
-      closeCharPresetModal();
-      const toAdd = p.chars.filter(c=>c.enabled);
-      let added = 0;
-      for(let si=0; si<chars.length && added<toAdd.length; si++){
-        if(!chars[si].enabled){
-          Object.assign(chars[si], {...toAdd[added], pos:{...toAdd[added].pos}});
-          added++;
-        }
-      }
-      applyCharsToUI();
-      toast(`${added}개 캐릭터 추가됨`,'ok');
-    }},
-    {label:'📍 슬롯 지정', className:'btn-ghost', cb:()=>{
-      const toPlace = p.chars.filter(c=>c.enabled);
-      if(!toPlace.length){ toast('활성 캐릭터 없음','err'); return; }
-      openMultiSlotPicker(
-        `"${p.name}" 슬롯 선택`,
-        `프리셋 ${toPlace.length}명 · 선택 순서대로 적용`,
-        toPlace,
-        (selectedSlots)=>{
-          closeCharPresetModal();
-          selectedSlots.forEach((slotIdx, order)=>{
-            if(order >= toPlace.length) return;
-            Object.assign(chars[slotIdx], {...toPlace[order], pos:{...(toPlace[order].pos||{x:0.5,y:0.5})}});
-            chars[slotIdx].enabled = true;
-          });
-          applyCharsToUI();
-          saveSettings();
-          toast(`${selectedSlots.length}개 슬롯에 적용됨`,'ok');
-        },
-        ()=>{ loadCharPreset(i); } // 취소 시 다시 어떻게 불러올까 다이얼로그로
-      );
-    }},
-    {label:'🔄 전체 덮어씌우기', className:'btn-ghost', cb:()=>{
-      closeCharPresetModal();
-      p.chars.forEach((c,i)=>{
-        Object.assign(chars[i], {...c, pos:{...c.pos}});
-      });
-      if(p.useCoords !== undefined && p.useCoords !== _useCoords) toggleUseCoords();
-      applyCharsToUI();
-      toast(`"${p.name}" 적용됨`,'ok');
-    }},
-    {label:'취소', className:'btn-ghost', cb:()=>{}}
-  ]);
 }
 
 function applyCharsToUI(){
@@ -9530,29 +9189,6 @@ setTimeout(()=>{
   });
 }, 0);
 
-// ─────────────── 설정창 오른쪽 스와이프로 닫기 ───────────────
-(function(){
-  function _init(){
-    const panel = document.getElementById('configPanel');
-    if(!panel) return;
-    let _sx=0, _sy=0;
-    panel.addEventListener('touchstart', e=>{
-      _sx = e.touches[0].clientX;
-      _sy = e.touches[0].clientY;
-    }, {passive:true});
-    panel.addEventListener('touchend', e=>{
-      const dx = e.changedTouches[0].clientX - _sx;
-      const dy = e.changedTouches[0].clientY - _sy;
-      if(dx > 60 && Math.abs(dy) < Math.abs(dx)) closeConfigPanel();
-    }, {passive:true});
-  }
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', _init, {once:true});
-  } else {
-    _init();
-  }
-})();
-
 // ─────────────── 모바일 네비 스와이프 탭 전환 (4탭 전체) ───────────────
 (function initMobNavSwipe(){
   const NAV_ORDER = ['prompts','characters','gallery','addetc'];
@@ -9571,7 +9207,7 @@ setTimeout(()=>{
     '#sessionModal.open','#sesExportModal.open','#dataManageModal.open',
     '#posGrid.open','#tagAcDrop.open','#exifModal.open',
     '#loadChoiceDlg.open','#overwriteDlg.open','#slotPicker.open',
-    '#soloPresetModal.open','#cpGalleryPicker.open',
+    '#cpGalleryPicker.open',
     '#cpThumbViewer.open','#blurSettingsPanel.open'
     // ← 여기에 추가: '#newModal.open'
   ].join(',');
@@ -9582,7 +9218,7 @@ setTimeout(()=>{
     if(document.querySelector(MODAL_SEL)) return true;
     const opacityModals = [
       'cpAddModal','charStatusModal','outfitStatusModal',
-      'charSlotPicker','outfitSlotPicker','multiSlotPicker'
+      'charSlotPicker','outfitSlotPicker'
       // ← 여기에 추가: 'newModalId'
     ];
     if(opacityModals.some(id=>{ const el=document.getElementById(id); return el && el.style.pointerEvents==='all'; })) return true;
@@ -9751,7 +9387,6 @@ async function openDataManage(){
     {id:'dm-sz-pos',      key:'nai_presets_pos',      label:'기본 프롬프트'},
     {id:'dm-sz-neg',      key:'nai_presets_neg',      label:'네거티브'},
     {id:'dm-sz-add',      key:'nai_presets_add',      label:'후행'},
-    {id:'dm-sz-char',     key:'nai_presets_char',     label:'캐릭터 슬롯'},
     {id:'dm-sz-charquick', key:'nai_presets_charquick', label:'캐릭터'},
     {id:'dm-sz-outfit',   key:'nai_presets_outfitquick',   label:'의상'},
     {id:'dm-sz-style',    key:'nai_presets_style',    label:'그림체'},
@@ -9783,7 +9418,7 @@ async function openDataManage(){
     `<span style="padding-left:14px;">${t3('└ ')}${t2(label)}</span>${acc(val)}</div>`;
 
   // 프리셋 합계
-  const presetKeys = ['nai_presets_pos','nai_presets_neg','nai_presets_add','nai_presets_char','nai_presets_charquick','nai_presets_outfitquick','nai_presets_style'];
+  const presetKeys = ['nai_presets_pos','nai_presets_neg','nai_presets_add','nai_presets_charquick','nai_presets_outfitquick','nai_presets_style'];
   const presetTotal = presetKeys.reduce((s,k)=>{ const v=localStorage.getItem(k)||''; return s+(v.length*2)/1024; },0);
 
   let html = '';
@@ -9792,7 +9427,6 @@ async function openDataManage(){
   html += sub('기본 프롬프트', kb('nai_presets_pos'));
   html += sub('네거티브', kb('nai_presets_neg'));
   html += sub('후행', kb('nai_presets_add'));
-  html += sub('슬롯 프롬프트', kb('nai_presets_char'));
   html += sub('캐릭터', kb('nai_presets_charquick'));
   html += sub('의상', kb('nai_presets_outfitquick'));
   html += row('', '그림체 프리셋', kb('nai_presets_style'));
@@ -9892,7 +9526,6 @@ async function dmExport(){
     if(get('dm-inc-pos'))    data.presets_pos    = JSON.parse(localStorage.getItem('nai_presets_pos')||'[]');
     if(get('dm-inc-neg'))    data.presets_neg    = JSON.parse(localStorage.getItem('nai_presets_neg')||'[]');
     if(get('dm-inc-add'))    data.presets_add    = JSON.parse(localStorage.getItem('nai_presets_add')||'[]');
-    if(get('dm-inc-char'))      data.presets_char      = JSON.parse(localStorage.getItem('nai_presets_char')||'[]');
     if(get('dm-inc-charquick')) data.presets_charquick = JSON.parse(localStorage.getItem('nai_presets_charquick')||'[]');
     if(get('dm-inc-outfit')) data.presets_outfit = JSON.parse(localStorage.getItem('nai_presets_outfitquick')||'[]');
     if(get('dm-inc-style'))  data.styles         = JSON.parse(localStorage.getItem('nai_presets_style')||'[]');
@@ -9919,7 +9552,6 @@ async function dmDeleteSelected(){
   if(get('dm-inc-pos'))    targets.push('기본 프롬프트 프리셋');
   if(get('dm-inc-neg'))    targets.push('네거티브 프리셋');
   if(get('dm-inc-add'))    targets.push('후행 프롬프트 프리셋');
-  if(get('dm-inc-char'))      targets.push('⭐ 슬롯 프롬프트');
   if(get('dm-inc-charquick')) targets.push('👤 캐릭터 프리셋');
   if(get('dm-inc-outfit')) targets.push('의상 프리셋');
   if(get('dm-inc-style'))  targets.push('그림체 프리셋');
@@ -9930,7 +9562,6 @@ async function dmDeleteSelected(){
     if(get('dm-inc-pos'))    localStorage.removeItem('nai_presets_pos');
     if(get('dm-inc-neg'))    localStorage.removeItem('nai_presets_neg');
     if(get('dm-inc-add'))    localStorage.removeItem('nai_presets_add');
-    if(get('dm-inc-char'))      localStorage.removeItem('nai_presets_char');
     if(get('dm-inc-charquick')) localStorage.removeItem('nai_presets_charquick');
     if(get('dm-inc-outfit')) localStorage.removeItem('nai_presets_outfitquick');
     if(get('dm-inc-style'))  localStorage.removeItem('nai_presets_style');
@@ -9984,7 +9615,7 @@ async function dmDeleteAll(){
     async ()=>{
       // localStorage 전체 클리어
       ['nai_studio_v3','nai_presets_pos','nai_presets_neg','nai_presets_add',
-       'nai_presets_char','nai_presets_outfitquick','nai_presets_style'].forEach(k=>localStorage.removeItem(k));
+       'nai_presets_outfitquick','nai_presets_style'].forEach(k=>localStorage.removeItem(k));
       // IndexedDB 갤러리 이미지 전체 삭제
       await GDB.clearAll().catch(()=>{});
       toast('전체 삭제 완료 — 새로고침 후 적용됩니다', 'ok');
@@ -10150,9 +9781,9 @@ function setUiScale(val){ if(isMobile()) return;
   // 팝업창 최대높이 보정
   const BOX_IDS = [
     'taModalBox','styleModalBox','presetModalBox','sessionModalBox',
-    'sesExportModalBox','charPresetModalBox','soloPresetModalBox',
+    'sesExportModalBox','charPresetModalBox',
     'cpAddModalBox','charStatusBox','outfitStatusBox',
-    'charSlotPickerBox','outfitSlotPickerBox','multiSlotPickerBox',
+    'charSlotPickerBox','outfitSlotPickerBox',
     'exifModalBox','cpGalleryPickerBox',
     'dataManageBox'
   ];
@@ -10183,10 +9814,10 @@ function setUiScale(val){ if(isMobile()) return;
   // (position:fixed;inset:0 풀스크린 오버레이 모달만 — delayPanel/tagAcDrop 제외)
   const OUTER_MODALS = [
     'styleImgViewer','presetModal','sessionModal','sesExportModal',
-    'charPresetModal','soloPresetModal',
+    'charPresetModal',
     'cpAddModal','cpThumbViewer','cpGalleryPicker','slotPicker',
     'charStatusModal','outfitStatusModal',
-    'outfitSlotPicker','charSlotPicker','multiSlotPicker',
+    'outfitSlotPicker','charSlotPicker',
     'overwriteDlg','dataManageModal','confirmDlg'
   ];
   const wPct = (100 / scale).toFixed(4);
@@ -10419,7 +10050,6 @@ setTimeout(_syncResBtns, 0);
       {id:'cpAddModal',       close:()=>closeCpAddModal()},
       {id:'charSlotPicker',   close:()=>closeQCharsSlotPicker()},
       {id:'outfitSlotPicker', close:()=>closeQOutfitsSlotPicker()},
-      {id:'multiSlotPicker',  close:()=>closeMultiSlotPicker()},
       {id:'charStatusModal',  close:()=>closeQCharsStatusModal()},
       {id:'outfitStatusModal',close:()=>closeQOutfitsStatusModal()},
     ];
@@ -10441,7 +10071,6 @@ setTimeout(_syncResBtns, 0);
       {sel:'#sessionModal.open',     close:()=>closeSessionModal()},
       {sel:'#sesExportModal.open',   close:()=>closeSesExportModal()},
       {sel:'#dataManageModal.open',  close:()=>closeDataManage()},
-      {sel:'#soloPresetModal.open',  close:()=>closeSoloPresetModal()},
       {sel:'#loadChoiceDlg.open',    close:()=>closeLoadChoice()},
       {sel:'#posGrid.open',          close:()=>document.getElementById('posGrid').classList.remove('open')},
     ];
@@ -10956,7 +10585,6 @@ document.addEventListener('contextmenu', function(e) {
       {id:'cpAddModal',       close:()=>closeCpAddModal()},
       {id:'charSlotPicker',   close:()=>closeQCharsSlotPicker()},
       {id:'outfitSlotPicker', close:()=>closeQOutfitsSlotPicker()},
-      {id:'multiSlotPicker',  close:()=>closeMultiSlotPicker()},
       {id:'charStatusModal',  close:()=>closeQCharsStatusModal()},
       {id:'outfitStatusModal',close:()=>closeQOutfitsStatusModal()},
     ];
@@ -10977,7 +10605,6 @@ document.addEventListener('contextmenu', function(e) {
       {sel:'#sessionModal.open',     close:()=>closeSessionModal()},
       {sel:'#sesExportModal.open',   close:()=>closeSesExportModal()},
       {sel:'#dataManageModal.open',  close:()=>closeDataManage()},
-      {sel:'#soloPresetModal.open',  close:()=>closeSoloPresetModal()},
       {sel:'#posGrid.open',          close:()=>document.getElementById('posGrid').classList.remove('open')},
     ];
     for(const m of classModals){
@@ -10991,28 +10618,6 @@ document.addEventListener('contextmenu', function(e) {
   return false;
 });
 
-// ── 설정창 오른쪽 스와이프로 닫기 ──
-(()=>{
-  function _initConfigSwipe(){
-    let _csx=0, _csy=0;
-    const panel = document.getElementById('configPanel');
-    if(!panel) return;
-    panel.addEventListener('touchstart', e=>{
-      _csx = e.touches[0].clientX;
-      _csy = e.touches[0].clientY;
-    }, {passive:true});
-    panel.addEventListener('touchend', e=>{
-      const dx = e.changedTouches[0].clientX - _csx;
-      const dy = e.changedTouches[0].clientY - _csy;
-      if(dx > 60 && Math.abs(dy) < Math.abs(dx)) closeConfigPanel();
-    }, {passive:true});
-  }
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', _initConfigSwipe, {once:true});
-  } else {
-    _initConfigSwipe();
-  }
-})();
 
 </script>
 
@@ -11020,10 +10625,6 @@ document.addEventListener('contextmenu', function(e) {
 </div>
 
 <div id="configPanel" style="visibility:hidden;pointer-events:none;opacity:0;transition:opacity .15s;position:fixed;top:44px;right:auto;width:480px;max-height:calc(100vh - 44px);overflow-y:auto;scrollbar-gutter:stable;background:var(--panel);border:1px solid var(--t3);border-radius:0 0 6px 6px;z-index:9500;box-shadow:0 8px 24px rgba(0,0,0,.9);">
-  <!-- 스와이프 닫기 핸들 (모바일) -->
-  <div id="configPanelSwipeHdr" class="mob-only" style="width:100%;display:flex;align-items:center;justify-content:center;padding:6px 0 4px;cursor:ns-resize;flex-shrink:0;touch-action:none;position:sticky;top:0;background:var(--panel);z-index:2;">
-    <div style="width:36px;height:4px;background:var(--b3);border-radius:2px;"></div>
-  </div>
   <div style="padding:14px;display:flex;flex-direction:column;gap:14px;">
 
     <!-- UI 크기 (PC 전용) -->
@@ -11046,7 +10647,7 @@ document.addEventListener('contextmenu', function(e) {
     </div>
 
     <!-- 테마 -->
-    <div style="padding-bottom:12px;border-bottom:1px solid var(--b1);">
+    <div id="configThemeSection" style="padding-bottom:12px;border-bottom:1px solid var(--b1);">
       <div class="sec-title" style="margin-bottom:8px;">테마</div>
       <div class="theme-swatches">
         <div class="theme-swatch active" id="thsw-default" onclick="setTheme('default')" title="Default"
