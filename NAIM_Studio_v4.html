@@ -7779,10 +7779,12 @@ function _attachHdrSwipeClose(hdrId, boxId, closeFn){
   const hdr = document.getElementById(hdrId);
   const box = document.getElementById(boxId);
   if(!hdr || !box) return;
-  let _sy = 0, _locked = null;
+  let _sy = 0, _locked = null, _baseTransform = '';
   hdr.addEventListener('touchstart', e=>{
     _sy = e.touches[0].clientY;
     _locked = null;
+    // 스와이프 시작 시점의 transform 저장 (posGrid처럼 translate+scale 있는 경우 대응)
+    _baseTransform = box.style.transform || '';
     box.style.transition = 'none';
   }, {passive:true});
   hdr.addEventListener('touchmove', e=>{
@@ -7793,35 +7795,34 @@ function _attachHdrSwipeClose(hdrId, boxId, closeFn){
     }
     if(_locked !== 'down') return;
     if(dy <= 0) return;
-    box.style.transform = `translateY(${dy}px)`;
+    // 기존 transform에 translateY를 추가
+    box.style.transform = _baseTransform ? `${_baseTransform} translateY(${dy}px)` : `translateY(${dy}px)`;
     box.style.opacity = String(Math.max(0, 1 - dy / 300));
   }, {passive:true});
   hdr.addEventListener('touchend', e=>{
     if(_locked !== 'down'){
       box.style.transition = '';
-      box.style.transform = '';
+      box.style.transform = _baseTransform;
       box.style.opacity = '';
       return;
     }
     const dy = e.changedTouches[0].clientY - _sy;
     if(dy > 80){
       box.style.transition = 'transform .2s ease, opacity .2s';
-      box.style.transform = 'translateY(120%)';
+      box.style.transform = _baseTransform ? `${_baseTransform} translateY(120%)` : 'translateY(120%)';
       box.style.opacity = '0';
       setTimeout(()=>{
-        // 트랜지션 끊고 닫기 — closeFn의 CSS 전환이 box 스타일을 덮지 않게
         box.style.transition = 'none';
         closeFn();
-        // 다음 프레임에 스타일 초기화 (모달 이미 숨겨진 후)
         requestAnimationFrame(()=>{
-          box.style.transform = '';
+          box.style.transform = _baseTransform;
           box.style.opacity = '';
           box.style.transition = '';
         });
       }, 200);
     } else {
       box.style.transition = 'transform .15s ease, opacity .15s';
-      box.style.transform = '';
+      box.style.transform = _baseTransform;
       box.style.opacity = '';
     }
   }, {passive:true});
